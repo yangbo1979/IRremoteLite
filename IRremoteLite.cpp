@@ -34,16 +34,15 @@ void IRsend::enableIROut(int khz) {
   TIMER_CONFIG_KHZ(khz);
 }
 
-
-void IRsend::sendRaw(unsigned int buf[], int len, int hz)
+void IRsend::sendRaw(PROGMEM  prog_uint16_t buf[], int len, int hz)
 {
   enableIROut(hz);
   for (int i = 0; i < len; i++) {
     if (i & 1) {
-      space(buf[i]);
+      space(pgm_read_word_near(buf+i));
     } 
     else {
-      mark(buf[i]);
+      mark(pgm_read_word_near(buf+i));
     }
   }
   space(0); // Just to be sure
