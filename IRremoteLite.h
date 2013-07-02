@@ -11,6 +11,9 @@
  *
  * JVC and Panasonic protocol added by Kristian Lauszus (Thanks to zenwheel and other people at the original blog post)
  */
+ 
+ 
+#include <avr/pgmspace.h>
 
 #ifndef IRremoteRawSend_h
 #define IRremoteRawSend_h
@@ -46,7 +49,7 @@ class IRsend
 public:
 	IRsend() {}
   void enableIROut(int khz);
-  void sendRaw(unsigned int buf[], int len, int hz);
+  void sendRaw(PROGMEM  prog_uint16_t buf[], int len, int hz);
   VIRTUAL void mark(int usec);
   VIRTUAL void space(int usec);
 }
